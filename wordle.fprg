@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="Worlde"/>
+        <attribute name="authors" value="optqu"/>
+        <attribute name="about" value="flowgorithm simple wordle"/>
+        <attribute name="saved" value="2025-10-24 09:29:40 am"/>
+        <attribute name="created" value="b3B0cXU7VFFfTEFQVE9QOzIwMjUtMDktMjQ7MDI6MTc6MzYgcG07MjY0NA=="/>
+        <attribute name="edited" value="b3B0cXU7VFFfTEFQVE9QOzIwMjUtMDktMjQ7MDM6MzY6MzQgcG07MTtvcHRxdTtUUV9MQVBUT1A7MjAyNS0wOS0yNDswMjoxNzozNiBwbTs1NDU1"/>
+        <attribute name="edited" value="b3B0cXU7VFFfTEFQVE9QOzIwMjUtMTAtMjQ7MDk6Mjk6NDAgYW07NjsyNzM5"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="secretword" type="String" array="False" size=""/>
+            <declare name="values" type="String" array="True" size="5"/>
+            <declare name="dictionary" type="String" array="True" size="5"/>
+            <assign variable="dictionary[0]" expression="&quot;aback&quot;"/>
+            <assign variable="dictionary[1]" expression="&quot;bicep&quot;"/>
+            <assign variable="dictionary[2]" expression="&quot;cloud&quot;"/>
+            <assign variable="dictionary[3]" expression="&quot;dusty&quot;"/>
+            <assign variable="dictionary[4]" expression="&quot;epoch&quot;"/>
+            <declare name="rng" type="Integer" array="False" size=""/>
+            <assign variable="rng" expression="Random(5)"/>
+            <assign variable="secretword" expression="dictionary[rng]"/>
+            <declare name="guessletter" type="String" array="True" size="5"/>
+            <declare name="secretletter" type="String" array="True" size="5"/>
+            <declare name="userinput" type="String" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="debug" expression="true"/>
+            <declare name="e" type="Integer" array="False" size=""/>
+            <declare name="k" type="Integer" array="False" size=""/>
+            <declare name="u" type="Integer" array="False" size=""/>
+            <declare name="tries" type="Integer" array="False" size=""/>
+            <declare name="checked" type="Boolean" array="True" size="5"/>
+            <declare name="won" type="Boolean" array="False" size=""/>
+            <for variable="u" start="0" end="4" direction="inc" step="1">
+                <assign variable="values[u]" expression="&quot;gray&quot;"/>
+                <assign variable="checked[u]" expression="false"/>
+            </for>
+            <for variable="tries" start="0" end="5" direction="inc" step="1">
+                <output expression="&quot;Geef een woord van 5 letters!&quot;" newline="True"/>
+                <input variable="userinput"/>
+                <for variable="k" start="0" end="4" direction="inc" step="1">
+                    <assign variable="guessletter[k]" expression="Char(userinput, k)"/>
+                    <assign variable="secretletter[k]" expression="Char(secretword, k)"/>
+                </for>
+                <for variable="i" start="0" end="4" direction="inc" step="1">
+                    <if expression="guessletter[i] = secretletter[i]">
+                        <then>
+                            <assign variable="values[i]" expression="&quot;green&quot;"/>
+                            <assign variable="checked[i]" expression="true"/>
+                        </then>
+                        <else>
+                            <for variable="e" start="0" end="4" direction="inc" step="1">
+                                <if expression="(guessletter[i] = secretletter[e]) and (checked[e] = false)">
+                                    <then>
+                                        <assign variable="values[i]" expression="&quot;yellow&quot;"/>
+                                        <assign variable="checked[i]" expression="true"/>
+                                    </then>
+                                    <else/>
+                                </if>
+                            </for>
+                        </else>
+                    </if>
+                </for>
+                <output expression="&quot;[&quot; &amp; guessletter[0] &amp; &quot;]: &quot; &amp; values[0] &amp; &quot; &quot; &amp;&#13;&#10;&quot;[&quot; &amp; guessletter[1] &amp; &quot;]: &quot; &amp; values[1] &amp; &quot; &quot; &amp;&#13;&#10;&quot;[&quot; &amp; guessletter[2] &amp; &quot;]: &quot; &amp; values[2] &amp; &quot; &quot; &amp;&#13;&#10;&quot;[&quot; &amp; guessletter[3] &amp; &quot;]: &quot; &amp; values[3] &amp; &quot; &quot; &amp;&#13;&#10;&quot;[&quot; &amp; guessletter[4] &amp; &quot;]: &quot; &amp; values[4] &amp; &quot; &quot;" newline="True"/>
+                <if expression="(values[0] = &quot;green&quot;) and (values[1] = &quot;green&quot;) and (values[2] = &quot;green&quot;) and (values[3] = &quot;green&quot;) and (values[4] = &quot;green&quot;)">
+                    <then>
+                        <assign variable="won" expression="true"/>
+                        <assign variable="tries" expression="6"/>
+                    </then>
+                    <else>
+                        <for variable="u" start="0" end="4" direction="inc" step="1">
+                            <assign variable="values[u]" expression="&quot;gray&quot;"/>
+                            <assign variable="checked[u]" expression="false"/>
+                        </for>
+                    </else>
+                </if>
+            </for>
+            <if expression="won = true">
+                <then>
+                    <output expression="&quot;JE HEBT GEWONNEN! Hopelijk heb je genoten van deze flowgorithm monstrocity&quot;" newline="True"/>
+                </then>
+                <else>
+                    <output expression="&quot;Je hebt verloren. Hopelijk heb je genoten van deze flowgorithm monstrocity&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
